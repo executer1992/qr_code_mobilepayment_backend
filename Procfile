@@ -1,1 +1,1 @@
-web: node .\dist\js\server.min.js
+web: node ./dist/js/server.min.js
