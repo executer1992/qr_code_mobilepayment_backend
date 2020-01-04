@@ -3,12 +3,12 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const SECRET_KEY = "secretkey23456";
-const {findUserByEmail, createUser} = require('../db/user/userRepository');
+const {findUserByEmail, createUser} = require('../usingDB/controller/userRepository');
 
 router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    findUserByEmail(email, (err, user)=>{
+    findUserByEmail(email, (err, user) => {
         if (err) return  res.status(500).send('Server error!');
         if (!user) return  res.status(404).send('User not found!');
         const  result  =  bcrypt.compareSync(password, user.password);
