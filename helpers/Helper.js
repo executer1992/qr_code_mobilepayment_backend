@@ -34,6 +34,7 @@ const Helper = {
    * @returns {string} token
    */
   generateToken(id, expireTime) {
+    console.log(process.env.DATABASE_URL);
     const token = jwt.sign({
       userId: id
     },

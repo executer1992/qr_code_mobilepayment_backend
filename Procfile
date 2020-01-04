@@ -1,1 +1,1 @@
-web: babel-watch index.js
+web: node .\dist\js\server.min.js
