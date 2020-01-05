@@ -1,27 +1,15 @@
-import {Pool}  from 'pg';
+// import {Pool}  from 'pg';
 
-const pool = new Pool({
-  connectionString: 'postgres://postgres:Arsenal123@localhost:5432/diplomaproject'
-});
+// const pool = new Pool({
+//   connectionString: 'postgres://postgres:Arsenal123@localhost:5432/diplomaproject'
+// });
+import db from '../db/config';
 
 
- /**
-   * DB Query
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} object 
-   */
-  const query = (text, params) => {
-    return new Promise((resolve, reject) => {
-        pool.query(text, params)
-        .then( (res) => resolve(res))
-      .catch((err) => reject(err) )
-    })
-  }
 
 export const getUserByEmail = (email) => {  
   const createQuery = 'SELECT * FROM users WHERE email = $1';
-    return query(createQuery, email);
+    return db.query(createQuery, [email]);
   }
 
 export const createUser = (user) => {
@@ -31,5 +19,5 @@ export const createUser = (user) => {
       `;
     const userValues = [user.id, user.name, user.email, user.password, user.created_date, user.modified_date];
     
-    return query(createQuery, userValues);
+    return db.query(createQuery, userValues);
   }

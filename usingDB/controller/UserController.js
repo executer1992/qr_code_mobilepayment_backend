@@ -1,6 +1,6 @@
 import moment from 'moment';
 import uuidv4 from 'uuid/v4';
-import db from '../db';
+import db from '../db/config';
 import Helper from '../../helpers/Helper';
 import User from '../models/User';
 import {getUserByEmail, createUser} from '../repository/UserRepository';
@@ -50,6 +50,7 @@ const UserController = {
 
     try {
       const { rows } = await getUserByEmail(req.body.email);
+
       if (!rows[0]) {
         return res.status(404).send({'message': 'User not found'});
       }
@@ -63,24 +64,7 @@ const UserController = {
       return res.status(400).send(error)
     }
   },
-  /**
-   * Delete A User
-   * @param {object} req 
-   * @param {object} res 
-   * @returns {void} return status code 204 
-   */
-  async delete(req, res) {
-    const deleteQuery = 'DELETE FROM users WHERE id=$1 returning *';
-    try {
-      const { rows } = await db.query(deleteQuery, [req.user.id]);
-      if(!rows[0]) {
-        return res.status(404).send({'message': 'user not found'});
-      }
-      return res.status(204).send({ 'message': 'deleted' });
-    } catch(error) {
-      return res.status(400).send(error);
-    }
-  }
+  
 }
 
 export default UserController;
