@@ -1,11 +1,4 @@
-// import {Pool}  from 'pg';
-
-// const pool = new Pool({
-//   connectionString: 'postgres://postgres:Arsenal123@localhost:5432/diplomaproject'
-// });
 import db from '../db/config';
-
-
 
 export const getUserByEmail = (email) => {  
   const createQuery = 'SELECT * FROM users WHERE email = $1';
