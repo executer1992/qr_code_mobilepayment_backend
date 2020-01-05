@@ -20,9 +20,8 @@ const pool = new Pool({
   }
 
 export const getUserByEmail = (email) => {  
-    return query('SELECT * FROM users WHERE email = $1', [email], (error, results) => {
-        if (error) {throw error}
-    })
+  const createQuery = 'SELECT * FROM users WHERE email = $1';
+    return query(createQuery, email);
   }
 
 export const createUser = (user) => {
