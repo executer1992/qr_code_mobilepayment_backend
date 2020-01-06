@@ -5,14 +5,14 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(128) NOT NULL,
   created_date TIMESTAMP,
   modified_date TIMESTAMP
-)
+);
 
 CREATE TABLE IF NOT EXISTS funds (
   user_id UUID NOT NULL,
   balance NUMERIC(8, 4),
   PRIMARY KEY (user_id),
   CONSTRAINT f_user_id FOREIGN KEY (user_id) REFERENCES users (id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS funds_history (
   id UUID PRIMARY KEY,
@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS funds_history (
   transaction_date TIMESTAMP,
   PRIMARY KEY (user_id),
   CONSTRAINT fh_user_id FOREIGN KEY (user_id) REFERENCES users (id)
-)
+);
 
