@@ -1,8 +1,8 @@
 import db from '../db/config';
 
-export const getUserByEmail = (email) => {  
-  const createQuery = 'SELECT * FROM users WHERE email = $1';
-    return db.query(createQuery, [email]);
+export const getUserByKey = (key, val) => {  
+  const createQuery = `SELECT * FROM users WHERE ${key} = $1`;
+    return db.query(createQuery, [val]);
   }
 
 export const createUser = (user) => {

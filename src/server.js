@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import 'babel-polyfill';
-import Auth from '../usingDB/middleware/Auth';
-import UserController from '../usingDB/controller/UserController';
+import Auth from '../http/middleware/Auth';
+import UserController from '../http/controller/UserController';
+import FundsController from '../http/controller/FundsController';
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../env') });
 
@@ -25,4 +26,5 @@ app.listen(port);
 
 app.post('/register', UserController.create);
 app.post('/login', UserController.login);
+app.get('/funds', FundsController.getBalance);
 console.log('app running on port ', 3000);

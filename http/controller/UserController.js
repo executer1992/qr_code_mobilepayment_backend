@@ -49,7 +49,7 @@ const UserController = {
     }
 
     try {
-      const { rows } = await getUserByEmail(req.body.email);
+      const { rows } = await getUserByKey('email', req.body.email);
 
       if (!rows[0]) {
         return res.status(404).send({'message': 'User not found'});
