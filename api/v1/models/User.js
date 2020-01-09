@@ -1,11 +1,12 @@
 import moment from 'moment';
 import uuidv4 from 'uuid/v4';
-import Helper from '../../helpers/Helper';
+import Helper from '../../../helpers/Helper';
 
 class User {
-    constructor(name, email, password) {
+    constructor(name, surname, email, password) {
         this._id = uuidv4();
         this._name = name;
+        this._surname = surname;
         this._email = email;
         this._password = Helper.hashPassword(password);
         this._created_date = moment(new Date());
@@ -18,6 +19,10 @@ class User {
 
     get name() {
         return this._name;
+    }
+
+    get surname() {
+        return this._surname;
     }
 
     get email() {

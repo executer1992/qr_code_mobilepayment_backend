@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
-    "start": "node ./dist/server.min.js"
+    "start": "node ./dist/js/server.min.js"
   },
   "keywords": [],
   "author": "",

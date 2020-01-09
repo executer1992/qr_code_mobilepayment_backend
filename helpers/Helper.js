@@ -34,14 +34,38 @@ const Helper = {
    * @returns {string} token
    */
   generateToken(id, expireTime) {
-    console.log(process.env.DATABASE_URL);
     const token = jwt.sign({
       userId: id
     },
       process.env.SECRET_KEY, { expiresIn: expireTime }
     );
     return token;
-  }
+  },
+
+  /**
+   * Gnerate Transaction Token
+   * @param {string} id
+   * @param {string} expireTime
+   * @returns {string} token
+   */
+  generateTransactionToken(id, expireTime) {
+    const token = jwt.sign({
+          userId: id
+        },
+        process.env.SECRET_KEY, { expiresIn: expireTime }
+    );
+    return token;
+  },
+
+  /**
+   * isCreditCardActive helper method
+   * @param {moment.Moment reqCreditCard
+   * @param {moment.Moment dbCreditCard
+   * @returns {Boolean} True or False
+   */
+  isCreditCardActive(reqCreditCard, dbCreditCard) {
+    return reqCreditCard.isBefore(dbCreditCard);
+  },
 }
 
 export default Helper;

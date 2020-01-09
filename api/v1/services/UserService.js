@@ -1,11 +1,11 @@
 import moment from 'moment';
 import uuidv4 from 'uuid/v4';
-import db from '../db/config';
-import Helper from '../../helpers/Helper';
+import db from '../../../db_config/config';
+import Helper from '../../../helpers/Helper';
 import User from '../models/User';
-import {getUserByEmail, createUser} from '../repository/UserRepository';
+import {getUserByKey, createUser} from '../repository/UserRepository';
 
-const UserController = {
+const UserService = {
   /**
    * Create A User
    * @param {object} req 
@@ -20,7 +20,7 @@ const UserController = {
       return res.status(400).send({ 'message': 'Please enter a valid email address' });
     }
 
-    const user = new User(req.body.name,req.body.email,req.body.password)
+    const user = new User(req.body.name,req.body.surname, req.body.email,req.body.password)
    
     try {
       const { rows } = await createUser(user);
@@ -49,8 +49,9 @@ const UserController = {
     }
 
     try {
-      const { rows } = await getUserByKey('email', req.body.email);
-
+      console.log(req.body);
+      const { rows } = await getUserByKey('email', [req.body.email]);
+      console.log(rows);
       if (!rows[0]) {
         return res.status(404).send({'message': 'User not found'});
       }
@@ -67,4 +68,4 @@ const UserController = {
   
 }
 
-export default UserController;
+export default UserService;
