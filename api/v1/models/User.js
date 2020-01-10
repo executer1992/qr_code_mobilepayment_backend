@@ -3,12 +3,12 @@ import uuidv4 from 'uuid/v4';
 import Helper from '../../../helpers/Helper';
 
 class User {
-    constructor(name, surname, email, password) {
+    constructor(data) {
         this._id = uuidv4();
-        this._name = name;
-        this._surname = surname;
-        this._email = email;
-        this._password = Helper.hashPassword(password);
+        this._name = data.name;
+        this._surname = data.surname;
+        this._email = data.email;
+        this._password = Helper.hashPassword(data.password);
         this._created_date = moment(new Date());
         this._modified_date = moment(new Date());
     }

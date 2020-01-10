@@ -5,6 +5,15 @@ export const getUserByKey = (key, val) => {
     return db.query(createQuery, val);
   }
 
+export const changePassword = (userValues, user_id) => {
+    const createQuery = `UPDATE users
+    SET (password, modified_date)
+    VALUES($1, $2)
+    WHERE id = ${user_id}
+    `;
+    return db.query(createQuery, userValues);
+}
+
 export const createUser = (user) => {
     const createQuery = `INSERT INTO
       users(id, name, surname, email, password, created_date, modified_date)

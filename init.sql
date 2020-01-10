@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS products_history (
 
 CREATE TABLE IF NOT EXISTS transaction_history (
   transaction_history_id UUID PRIMARY KEY,
+  user_id UUID NOT NULL,
   sender_credit_card_number DECIMAL(16) NOT NULL,
   receiver_credit_card_number DECIMAL(16) NOT NULL,
   transcation_ammount NUMERIC(8, 4) NOT NULL,

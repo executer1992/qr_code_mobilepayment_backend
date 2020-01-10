@@ -1,17 +1,10 @@
 import moment from 'moment';
-import uuidv4 from 'uuid/v4';
-import db from '../../../db_config/config';
 import Helper from '../../../helpers/Helper';
 import User from '../models/User';
-import {getUserByKey, createUser} from '../repository/UserRepository';
+import * as UserRepository from '../repository/UserRepository';
 
 const UserService = {
-  /**
-   * Create A User
-   * @param {object} req 
-   * @param {object} res
-   * @returns {object} user object 
-   */
+
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({'message': 'Some values are missing'});
@@ -20,10 +13,10 @@ const UserService = {
       return res.status(400).send({ 'message': 'Please enter a valid email address' });
     }
 
-    const user = new User(req.body.name,req.body.surname, req.body.email,req.body.password)
+    const user = new User(req.body)
    
     try {
-      const { rows } = await createUser(user);
+      const { rows } = await UserRepository.createUser(user);
       const expires_in = 24 * 60 * 60;
       const access_token = Helper.generateToken(user.id, expires_in);
       return res.status(201).send( { access_token, expires_in });
@@ -34,12 +27,7 @@ const UserService = {
       return res.status(400).send(error);
     }
   },
-  /**
-   * Login
-   * @param {object} req 
-   * @param {object} res
-   * @returns {object} user object 
-   */
+
   async login(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({'message': 'Some values are missing'});
@@ -49,9 +37,7 @@ const UserService = {
     }
 
     try {
-      console.log(req.body);
-      const { rows } = await getUserByKey('email', [req.body.email]);
-      console.log(rows);
+      const { rows } = await UserRepository.getUserByKey('email', [req.body.email]);
       if (!rows[0]) {
         return res.status(404).send({'message': 'User not found'});
       }
@@ -59,13 +45,32 @@ const UserService = {
         return res.status(401).send({ 'message': 'Password not valid' });
       }
       const expires_in = 24 * 60 * 60;
-      const token = Helper.generateToken(rows[0].id, expires_in);
-      return res.status(200).send({token, expires_in});
+      const access_token = Helper.generateToken(rows[0].id, expires_in);
+      return res.status(200).send({access_token, expires_in});
     } catch(error) {
       return res.status(400).send(error)
     }
   },
-  
+
+  async edit(req, res) {
+    if (!req.body.user) {
+      return res.status(400).send({'message': 'Some values are missing'});
+    }
+    const password = Helper.hashPassword(req.body.password);
+    const edit_date = moment(new Date());
+    try {
+      const { rows } = await UserRepository.changePassword([password, edit_date], req.user.id);
+      if (!rows[0]) {
+        return res.status(404).send({'message': 'User not found'});
+      }
+      const expires_in = 24 * 60 * 60;
+      const access_token = Helper.generateToken(rows[0].id, expires_in);
+      return res.status(200).send({access_token, expires_in});
+    } catch(error) {
+      return res.status(400).send(error)
+    }
+  }
+
 }
 
 export default UserService;

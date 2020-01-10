@@ -6,6 +6,7 @@ import UserService from '../api/v1/services/UserService';
 import CreditCardService from '../api/v1/services/CreditCardService';
 const path = require('path')
 import uuidv4 from 'uuid/v4';
+import TransactionHistoryService from "../api/v1/services/TransactionHistoryService";
 
 require('dotenv').config({ path: path.resolve(__dirname, '../env') });
 
@@ -13,7 +14,7 @@ const port = process.env.PORT  ||  3000;
 const corsOpts = {
     origin: '*',
     methods: ['GET','POST'],
-    allowedHeaders: ['Content-Type']};
+    allowedHeaders: ['Content-Type', 'x-access-token', 'Authorization']};
 const app = express()
 
 app.use(express.json())
@@ -21,12 +22,14 @@ app.use(express.json())
 app.get('/', (req, res) => {
     res.status(200).send('This is an authentication server');
 });
-console.log(uuidv4());
 app.use(cors(corsOpts));
 app.listen(port); 
 
+app.patch('/api/user', Auth.verifyToken, UserService.edit);
 app.post('/api/register', UserService.create);
 app.post('/api/login', UserService.login);
-app.get('/api/card', CreditCardService.verify, Auth.verifyToken);
-app.post('/api/card/connect', CreditCardService.connect);
+app.get('/api/cards', Auth.verifyToken, CreditCardService.verify);
+app.post('/api/cards', CreditCardService.create);
+app.get('/api/transactions', Auth.verifyToken, TransactionHistoryService.balance);
+app.post('/api/transactions', Auth.verifyToken, TransactionHistoryService.addTransaction);
 console.log('app running on port ', 3000);
