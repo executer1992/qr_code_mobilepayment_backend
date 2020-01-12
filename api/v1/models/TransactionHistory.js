@@ -34,3 +34,5 @@ class TransactionHistory {
         return this._user_id;
     }
 }
+
+export default TransactionHistory;

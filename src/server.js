@@ -25,11 +25,11 @@ app.get('/', (req, res) => {
 app.use(cors(corsOpts));
 app.listen(port); 
 
-app.patch('/api/user', Auth.verifyToken, UserService.edit);
-app.post('/api/register', UserService.create);
 app.post('/api/login', UserService.login);
+app.patch('/api/users', Auth.verifyToken, UserService.edit);
+app.post('/api/users', UserService.create);
 app.get('/api/cards', Auth.verifyToken, CreditCardService.verify);
-app.post('/api/cards', CreditCardService.create);
+app.post('/api/cards', Auth.verifyToken, CreditCardService.create);
 app.get('/api/transactions', Auth.verifyToken, TransactionHistoryService.balance);
 app.post('/api/transactions', Auth.verifyToken, TransactionHistoryService.addTransaction);
 console.log('app running on port ', 3000);

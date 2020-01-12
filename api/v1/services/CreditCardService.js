@@ -6,7 +6,7 @@ const CreditCardService = {
 
   async verify(req, res) {
     try {
-      const { rows } = await CreditCardRepository.getCreditCard('user_id', [req.user.id]);
+      const { rows } = await CreditCardRepository.getCreditCard('user_id', [req.body.user.id]);
 
       if(!rows[0]) {
         return res.status(400).send({ 'message': 'Your card is not connected' });
@@ -24,11 +24,11 @@ const CreditCardService = {
 
   async create(req, res) {
     const reqBody = req.body;
-    if (!reqBody.credit_card_number || !reqBody.credit_card_code || !reqBody.credit_card_cardholder_name || !reqBody.credit_card_expiration_time) {
+    if (!reqBody.credit_card_number || !reqBody.credit_card_code || !reqBody.credit_card_cardholder_name) {
       return res.status(400).send({'message': 'Some values are missing'});
     }
     try {
-      await CreditCardRepository.createCreditCard('credit_card_code', new CreditCard(reqBody));
+      const {rows } = await CreditCardRepository.createCreditCard(new CreditCard(reqBody));
         return res.status(201).send();
     }
     catch (error) {

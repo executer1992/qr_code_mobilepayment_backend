@@ -11,7 +11,6 @@ export const createCreditCard = (creditCard) => {
       credit_card(credit_card_id, user_id,credit_card_number,credit_card_code,credit_card_cardholder_name,credit_card_expiration_time,created_date)
       VALUES($1, $2, $3, $4, $5, $6, $7)
       `;
-    const creditCardValues = [creditCard.id, creditCard.userId, creditCard.creditCardNumber, creditCard.creditCardHolderName, creditCard.creditCardCode, creditCard.creditCardExpirationTime, creditCard.createDate];
-
+    const creditCardValues = [creditCard.id, creditCard.userId, creditCard.creditCardNumber, creditCard.creditCardCode, creditCard.creditCardHolderName, creditCard.creditCardExpirationTime, creditCard.createDate];
     return db.query(createQuery, creditCardValues);
 }

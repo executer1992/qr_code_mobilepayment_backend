@@ -5,7 +5,7 @@ import Helper from '../../../helpers/Helper';
 class CreditCard {
     constructor(data) {
         this._id = uuidv4();
-        this._user_id = data.user.user_id;
+        this._user_id = data.user.id;
         this._credit_card_number = data.credit_card_number;
         this._credit_card_cardholder_name = data.credit_card_cardholder_name;
         this._credit_card_code = data.credit_card_code;
