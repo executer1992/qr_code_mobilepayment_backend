@@ -1,7 +1,7 @@
-import {Pool}  from 'pg';
+import { Pool } from 'pg';
 
-const isProduction = process.env.NODE_ENV === 'production'
-const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
+const isProduction = process.env.NODE_ENV === 'production';
+const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
 
 const pool = new Pool({
   connectionString: 'postgresql://postgres:Arsenal123@localhost:5432/diplomaproject'
@@ -13,13 +13,14 @@ export default {
    * DB Query
    * @param {object} req
    * @param {object} res
-   * @returns {object} object 
+   * @returns {object} object
    */
-  query(text, params){
+  query(text, params) {
     return new Promise((resolve, reject) => {
-        pool.query(text, params)
-        .then( (res) => resolve(res))
-      .catch((err) => reject(err) )
-    })
+      pool
+        .query(text, params)
+        .then(res => resolve(res))
+        .catch(err => reject(err));
+    });
   }
-}
+};

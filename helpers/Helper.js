@@ -8,12 +8,12 @@ const Helper = {
    * @returns {string} returns hashed password
    */
   hashPassword(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
   },
   /**
    * comparePassword
-   * @param {string} hashPassword 
-   * @param {string} password 
+   * @param {string} hashPassword
+   * @param {string} password
    * @returns {Boolean} return True or False
    */
   comparePassword(hashPassword, password) {
@@ -34,10 +34,12 @@ const Helper = {
    * @returns {string} token
    */
   generateToken(id, expireTime) {
-    const token = jwt.sign({
-      userId: id
-    },
-      process.env.SECRET_KEY, { expiresIn: expireTime }
+    const token = jwt.sign(
+      {
+        userId: id
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: expireTime }
     );
     return token;
   },
@@ -49,9 +51,9 @@ const Helper = {
    * @returns {Boolean} True or False
    */
   isCreditCardActive(dbCreditCard) {
-      console.log(moment().isBefore(moment(dbCreditCard)))
+    console.log(moment().isBefore(moment(dbCreditCard)));
     return moment().isBefore(moment(dbCreditCard));
   }
-}
+};
 
 export default Helper;
