@@ -21,8 +21,12 @@ CREATE TABLE IF NOT EXISTS credit_card (
 
 CREATE TABLE IF NOT EXISTS products (
   product_id UUID PRIMARY KEY,
+  user_id UUID NOT NULL,
   product_name VARCHAR(128) NOT NULL,
-  product_price NUMERIC(8, 4) NOT NULL
+  product_price NUMERIC(8, 4) NOT NULL,
+  created_date TIMESTAMP,
+  modified_date TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS products_history (
@@ -30,6 +34,7 @@ CREATE TABLE IF NOT EXISTS products_history (
   product_id UUID NOT NULL,
   products_ammount DECIMAL NOT NULL,
   product_price NUMERIC(8, 4) NOT NULL,
+  created_date TIMESTAMP,
   FOREIGN KEY (product_id) REFERENCES products (product_id)
 );
 
@@ -39,7 +44,7 @@ CREATE TABLE IF NOT EXISTS transaction_history (
   sender_credit_card_number DECIMAL(16) NOT NULL,
   receiver_credit_card_number DECIMAL(16) NOT NULL,
   transcation_ammount NUMERIC(8, 4) NOT NULL,
-  transaction_date TIMESTAMP,
+  created_date TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

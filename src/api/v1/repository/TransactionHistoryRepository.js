@@ -5,17 +5,17 @@ export const getTransactionHistory = (key, val) => {
   return db.query(createQuery, val);
 };
 
-export const createHistoryTransaction = transactionHistory => {
+export const createHistoryTransaction = (transactionHistory) => {
   const createQuery = `INSERT INTO
-      transaction_history(transaction_history_id, sender_credit_card_number, receiver_credit_card_number, transcation_ammount, transaction_date, user_id)
+      transaction_history(transaction_history_id, sender_credit_card_number, receiver_credit_card_number, transcation_amount, transaction_date, user_id)
       VALUES($1, $2, $3, $4, $5, $6)
       `;
   const transactionHistoryValues = [
-    transactionHistory.id,
+    transactionHistory.transaction_history_id,
     transactionHistory.sender_credit_card_number,
     transactionHistory.receiver_credit_card_number,
-    transactionHistory.transcation_ammount,
-    transactionHistory.transcation_data,
+    transactionHistory.transaction_amount,
+    transactionHistory.transaction_data,
     transactionHistory.user_id
   ];
 

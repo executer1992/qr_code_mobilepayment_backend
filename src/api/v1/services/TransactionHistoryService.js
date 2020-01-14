@@ -16,9 +16,9 @@ const TransactionHistoryService = {
           balance: 0
         });
       }
-      const transactionsMade = transactionHistory.filter(transHis => transHis.sender_credit_card_number === creditCard[0].creditCardNumber);
+      const transactionsMade = transactionHistory.filter(transHis => transHis.sender_credit_card_number === creditCard[0].credit_card_number);
       const transactionsReceived = transactionHistory.filter(
-        transHis => transHis.sender_credit_card_number !== creditCard[0].creditCardNumber
+        transHis => transHis.sender_credit_card_number !== creditCard[0].credit_card_number
       );
 
       const payedSum = transactionsMade.reduce((a, b) => {
@@ -28,7 +28,7 @@ const TransactionHistoryService = {
         return a + b;
       }, 0);
       const balance = receivedSum - payedSum;
-      console.log(balance);
+
       return res.status(200).send({
         transactionsMade,
         transactionsReceived,
@@ -43,7 +43,7 @@ const TransactionHistoryService = {
 
   async addTransaction(req, res) {
     const reqBody = req.body;
-    if (!reqBody.sender_credit_card_number || !reqBody.receiver_credit_card_number || !reqBody.transcation_ammount) {
+    if (!reqBody.sender_credit_card_number || !reqBody.receiver_credit_card_number || !reqBody.transaction_amount) {
       return res.status(400).send({ message: 'Some values are missing' });
     }
     try {
