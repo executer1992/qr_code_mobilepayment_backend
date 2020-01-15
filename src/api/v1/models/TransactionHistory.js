@@ -6,7 +6,7 @@ class TransactionHistory {
     this._sender_credit_card_number = data.sender_credit_card_number;
     this._receiver_credit_card_number = data.receiver_credit_card_number;
     this._transaction_amount = data.transaction_amount;
-    this._transaction_data = data.transaction_data || moment(new Date());
+    this._created_date = data.created_date || moment(new Date());
     this._user_id = data.user.user_id;
   }
 
@@ -26,8 +26,8 @@ class TransactionHistory {
     this._transcation_ammount = value;
   }
 
-  set transaction_data(value) {
-    this._transaction_data = value;
+  set created_date(value) {
+    this._created_date = value;
   }
 
   set user_id(value) {
@@ -50,8 +50,8 @@ class TransactionHistory {
     return this._transcation_ammount;
   }
 
-  get transaction_data() {
-    return this._transaction_data;
+  get created_date() {
+    return this._created_date;
   }
 
   get user_id() {

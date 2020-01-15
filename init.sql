@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS transaction_history (
   user_id UUID NOT NULL,
   sender_credit_card_number DECIMAL(16) NOT NULL,
   receiver_credit_card_number DECIMAL(16) NOT NULL,
-  transcation_ammount NUMERIC(8, 4) NOT NULL,
+  transaction_amount NUMERIC(8, 4) NOT NULL,
   created_date TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );

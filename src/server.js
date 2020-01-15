@@ -14,7 +14,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../env') });
 const port = process.env.PORT || 3000;
 const corsOpts = {
   origin: '*',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'x-access-token', 'Authorization']
 };
 const app = express();
