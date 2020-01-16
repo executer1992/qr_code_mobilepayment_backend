@@ -9,10 +9,7 @@ const CreditCardService = {
       if (!rows[0]) {
         return res.status(400).send({ message: 'Your card is not connected' });
       }
-      // const cardIsActive = Helper.isCreditCardActive(rows[0].credit_card_expiration_time);
-      // if (!cardIsActive) {
-      //   return res.status(400).send({'message': 'Credit card is not active'})
-      // }
+
       return res.status(200).send();
     } catch (error) {
       return res.status(400).send(error);

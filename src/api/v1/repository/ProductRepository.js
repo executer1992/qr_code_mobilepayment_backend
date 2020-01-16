@@ -16,12 +16,12 @@ export const createProduct = (product) => {
       VALUES($1, $2, $3, $4, $5, $6)
       `;
     const productValues = [
-        product.product_id,
-        product.user_id,
-        product.product_name,
-        product.product_price,
-        product.created_date,
-        product.modified_date,
+        product.productId,
+        product.userId,
+        product.productName,
+        product.productPrice,
+        product.createdDate,
+        product.modifiedDate,
     ];
     return db.query(createQuery, productValues);
 };

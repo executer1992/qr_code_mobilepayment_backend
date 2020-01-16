@@ -16,9 +16,9 @@ const TransactionHistoryService = {
           balance: 0
         });
       }
-      const transactionsMade = transactionHistory.filter(transHis => transHis.sender_credit_card_number === creditCard[0].credit_card_number);
+      const transactionsMade = transactionHistory.filter(transHis => transHis.senderCreditCardNumber === creditCard[0].creditCardNumber);
       const transactionsReceived = transactionHistory.filter(
-        transHis => transHis.sender_credit_card_number !== creditCard[0].credit_card_number
+        transHis => transHis.senderCreditCardNumber !== creditCard[0].creditCardNumber
       );
 
       const payedSum = transactionsMade.reduce((a, b) => {

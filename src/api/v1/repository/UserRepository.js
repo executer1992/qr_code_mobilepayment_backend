@@ -14,12 +14,20 @@ export const changePassword = (userValues, user_id) => {
   return db.query(createQuery, userValues);
 };
 
-export const createUser = (user) => {
+export const createUser = user => {
   const createQuery = `INSERT INTO
       users(id, name, surname, email, password, created_date, modified_date)
       VALUES($1, $2, $3, $4, $5, $6, $7)
       `;
-  const userValues = [user.id, user.name, user.surname, user.email, user.password, user.created_date, user.modified_date];
+  const userValues = [
+    user.userId,
+    user.userName,
+    user.userSurname,
+    user.userEmail,
+    user.userPassword,
+    user.createdDate,
+    user.modifiedDate
+  ];
 
   return db.query(createQuery, userValues);
 };

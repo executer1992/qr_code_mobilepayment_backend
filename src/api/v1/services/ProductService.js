@@ -38,13 +38,9 @@ const ProductService = {
         }
         const product = new Product(reqBody);
         try {
-            const { rows } = await ProductRepository.createProduct(product);
+            await ProductRepository.createProduct(product);
+             return res.status(201).send(product);
 
-            if (rows[0]) {
-                return res.status(201).send({product: rows[0]});
-            } else {
-                return res.status(400).send({ message: 'We could not add the product' });
-            }
         } catch (error) {
             return res.status(400).send(error);
         }
