@@ -29,12 +29,12 @@ export const createProduct = (product) => {
 
 export const updateProduct = (keys, values, productId) => {
     const columns = keys.join(', ');
-    const colValues = keys.map( (key, index) => `$${index + 1}`);
+    const colValues = keys.map( (key, index) => `$${index + 1}`).join(', ');
     const createQuery = `UPDATE products
-    SET (${columns})
-    VALUES (${colValues})
+    SET (product_name, product_price)
+    VALUES ($1, $2)
     WHERE product_id = ${productId}`;
-
+    console.log(createQuery);
     return db.query(createQuery, values);
 }
 
