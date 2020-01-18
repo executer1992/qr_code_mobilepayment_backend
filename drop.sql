@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS credit_card;
+DROP TABLE IF EXISTS credit_card CASCADE;
 
-DROP TABLE IF EXISTS transaction_history;
+DROP TABLE IF EXISTS transaction_history CASCADE;
 
-DROP TABLE IF EXISTS products_historyl
+DROP TABLE IF EXISTS products_history CASCADE;
 
-DROP TABLE IF EXITS products;
+DROP TABLE IF EXISTS products CASCADE;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
