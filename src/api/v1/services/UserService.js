@@ -53,7 +53,7 @@ const UserService = {
       }
       const expires_in = 24 * 60 * 60;
       const access_token = Helper.generateToken(rows[0].id, expires_in);
-      const { user } = rows[0];
+      const user  = rows[0];
       return res.status(200).send({user, access_token, expires_in });
     } catch (error) {
       return res.status(400).send(error);
