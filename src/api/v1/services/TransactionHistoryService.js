@@ -43,9 +43,6 @@ const TransactionHistoryService = {
 
   async addTransaction(req, res) {
     const reqBody = req.body;
-    if (!reqBody.sender_credit_card_number || !reqBody.receiver_credit_card_number || !reqBody.transaction_amount) {
-      return res.status(400).send({ message: 'Some values are missing' });
-    }
     try {
       const { rows } = await TransactionRepository.createHistoryTransaction(new TransactionHistory(reqBody));
       return res.status(201).send(rows);

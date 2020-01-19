@@ -8,6 +8,7 @@ const path = require('path');
 
 import TransactionHistoryService from './api/v1/services/TransactionHistoryService';
 import ProductService from "./api/v1/services/ProductService";
+import TransactionMiddleware from './api/v1/middleware/TransactionMiddleware';
 
 require('dotenv').config({ path: path.resolve(__dirname, '../env') });
 
@@ -41,5 +42,5 @@ app.patch('/api/products/:id', Auth.verifyToken, ProductService.editProduct);
 app.delete('/api/products/:id', Auth.verifyToken, ProductService.removeProduct);
 
 app.get('/api/transactions', Auth.verifyToken, TransactionHistoryService.balance);
-app.post('/api/transactions', Auth.verifyToken, TransactionHistoryService.addTransaction);
+app.post('/api/transactions', Auth.verifyToken, TransactionMiddleware.verifyTransactionData, TransactionHistoryService.addTransaction);
 console.log('app running on port ', 3000);
