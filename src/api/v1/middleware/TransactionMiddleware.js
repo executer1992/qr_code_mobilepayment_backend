@@ -16,7 +16,7 @@ const TransactionMiddleware = {
 
       next();
     } catch (error) {
-      return res.status(400).send('Transaction middleware error');
+      return res.status(400).send(error);
     }
   }
 };
