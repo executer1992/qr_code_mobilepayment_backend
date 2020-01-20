@@ -44,7 +44,6 @@ const ProductService = {
   async editProduct(req, res) {
     const productName = req.body.product_name;
     const productPrice = req.body.product_price;
-    console.log(req.body);
     try {
       const { rows } = await ProductRepository.updateProduct(
         ['product_name', 'product_price'],

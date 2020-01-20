@@ -51,7 +51,6 @@ const Helper = {
    * @returns {Boolean} True or False
    */
   isCreditCardActive(dbCreditCard) {
-    console.log(moment().isBefore(moment(dbCreditCard)));
     return moment().isBefore(moment(dbCreditCard));
   }
 };

@@ -34,7 +34,6 @@ export const updateProduct = (keys, values, productId) => {
     SET (product_name, product_price)
     VALUES ($1, $2)
     WHERE product_id = ${productId}`;
-    console.log(createQuery);
     return db.query(createQuery, values);
 }
 

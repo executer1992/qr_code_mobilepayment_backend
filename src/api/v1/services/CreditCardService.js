@@ -22,7 +22,7 @@ const CreditCardService = {
       return res.status(400).send({ message: 'Some values are missing' });
     }
     try {
-      const { rows } = await CreditCardRepository.createCreditCard(new CreditCard(reqBody));
+       await CreditCardRepository.createCreditCard(new CreditCard(reqBody));
       return res.status(201).send();
     } catch (error) {
       return res.status(400).send(error);

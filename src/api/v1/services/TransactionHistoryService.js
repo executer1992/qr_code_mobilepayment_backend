@@ -44,8 +44,8 @@ const TransactionHistoryService = {
   async addTransaction(req, res) {
     const reqBody = req.body;
     try {
-      const { rows } = await TransactionRepository.createHistoryTransaction(new TransactionHistory(reqBody));
-      return res.status(201).send(rows);
+      await TransactionRepository.createHistoryTransaction(new TransactionHistory(reqBody));
+      return res.status(201).send();
     } catch (error) {
       return res.status(400).send(error);
     }
