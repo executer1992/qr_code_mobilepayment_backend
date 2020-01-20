@@ -1,10 +1,11 @@
-import moment from './CreditCard';
+import moment from 'moment';
+import uuidv4 from 'uuid/v4';
 
 class TransactionHistory {
   constructor(data) {
     this.transaction_history_id = uuidv4();
-    this.sender_credit_card_number = data.sender.sender_credit_card_number;
-    this.receiver_credit_card_number = data.client.receiver_credit_card_number;
+    this.sender_credit_card_number = data.sender.credit_card_number;
+    this.receiver_credit_card_number = data.client.credit_card_number;
     this.transaction_amount = data.transaction_amount;
     this.created_date = data.created_date || moment(new Date());
     this.user_id = data.user.id;

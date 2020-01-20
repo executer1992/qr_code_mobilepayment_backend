@@ -43,6 +43,7 @@ const TransactionHistoryService = {
 
   async addTransaction(req, res) {
     const reqBody = req.body;
+    const transactionHistory = new TransactionHistory(reqBody);
     try {
       await TransactionRepository.createHistoryTransaction(new TransactionHistory(reqBody));
       return res.status(201).send();

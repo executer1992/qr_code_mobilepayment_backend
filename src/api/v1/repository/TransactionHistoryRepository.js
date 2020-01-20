@@ -10,8 +10,8 @@ export const createHistoryTransaction = transactionHistory => {
       transaction_history_id,
       sender_credit_card_number,
       receiver_credit_card_number,
-      transcation_amount,
-      transaction_date,
+      transaction_amount,
+      created_date,
       user_id)
       VALUES($1, $2, $3, $4, $5, $6)
       `;
