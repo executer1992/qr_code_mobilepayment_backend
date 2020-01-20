@@ -42,5 +42,5 @@ app.patch('/api/products/:id', Auth.verifyToken, ProductService.editProduct);
 app.delete('/api/products/:id', Auth.verifyToken, ProductService.removeProduct);
 
 app.get('/api/transactions', Auth.verifyToken, TransactionHistoryService.balance);
-app.post('/api/transactions', Auth.verifyToken, TransactionMiddleware.verifyTransactionData, TransactionHistoryService.addTransaction);
+app.post('/api/transactions', [Auth.verifyToken, TransactionMiddleware.verifyTransactionData], TransactionHistoryService.addTransaction);
 console.log('app running on port ', 3000);
