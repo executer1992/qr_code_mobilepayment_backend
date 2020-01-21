@@ -1,8 +1,8 @@
 import db from '../../../db_config/config';
 
-export const getTransactionHistory = (key, val) => {
-  const createQuery = `SELECT * FROM transaction_history WHERE ${key} = $1`;
-  return db.query(createQuery, val);
+export const getTransactionHistory = creditCardNumber => {
+  const createQuery = `SELECT * FROM transaction_history WHERE receiver_credit_card_number = ${creditCardNumber} OR sender_credit_card_number = ${creditCardNumber}`;
+  return db.query(createQuery);
 };
 
 export const createHistoryTransaction = transactionHistory => {

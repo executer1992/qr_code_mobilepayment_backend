@@ -46,12 +46,46 @@ const Helper = {
 
   /**
    * isCreditCardActive helper method
-   * @param {moment.Moment reqCreditCard
-   * @param {moment.Moment dbCreditCard
+   * @param {moment.Moment} dbCreditCard
    * @returns {Boolean} True or False
    */
   isCreditCardActive(dbCreditCard) {
     return moment().isBefore(moment(dbCreditCard));
+  },
+
+  /**
+   * handleTransactions helper method
+   * @param {TransactionHistory} transactionHistory
+   * @param {number} creditCardNumber
+   * @returns {object}
+   */
+  handleTransactions(transactionHistory, creditCardNumber) {
+    const transactionsMade = transactionHistory.filter(
+        transHis => transHis.sender_credit_card_number === creditCardNumber
+    );
+    const transactionsReceived = transactionHistory.filter(
+        transHis => transHis.receiver_credit_card_number === creditCardNumber
+    );
+
+    const payedSum = transactionsMade
+        .map(transaction => Number(transaction.transaction_amount))
+        .reduce((a, b) => {
+          return a + b;
+        }, 0);
+    const receivedSum = transactionsReceived
+        .map(transaction => Number(transaction.transaction_amount))
+        .reduce((a, b) => {
+          return a + b;
+        }, 0);
+    const balance = receivedSum - payedSum;
+
+    return {
+      transactionsMade,
+      transactionsReceived,
+      payedSum,
+      balance,
+      receivedSum
+    }
   }
 };
 
