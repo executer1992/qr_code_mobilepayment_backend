@@ -5,8 +5,8 @@ const TransactionMiddleware = {
   async verifyTransactionData(req, res, next) {
 
     try {
-      const sender  = await getCreditCard('user_id', [req.body.sender_id]);
-      const client = await getCreditCard('user_id', [req.body.user.id]);
+      const client  = await getCreditCard('user_id', [req.body.sender_id]);
+      const sender = await getCreditCard('user_id', [req.body.user.id]);
 
       if (!sender.rows[0] || !client.rows[0]) {
         return res.status(400).send({ message: 'You have no active card' });
